@@ -22,7 +22,6 @@ class CreateDevicesTable extends Migration
             $table->string('language', 64);
             $table->enum('operation_system', ['android', 'ios', 'harmonyos', 'other']);
             $table->string('client_token', 128)->unique();
-
             $table->timestamps();
 
             $table->unique(['application_id', 'uid']);
