@@ -21,6 +21,7 @@ class MockPurchaseCheckController extends AbstractApiController
         $lastChar    = (int)substr($receiptHash, -1);
         $status      = $lastChar % 2 == 1;
         $this->set('status', $status);
+
         if ($status) {
             // server timezone must be set correct value for server's timezone.
             $now = strtotime(gmdate("Y-m-d H:i:s", time()));

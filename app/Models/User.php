@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string lastname;
  * @property string email;
  * @property string password;
- * @property string remember_token;
+ * @property string user_token;
  * @property string|\DateTime email_verified_at;
  * @property string|\DateTime created_at;
  * @property string|\DateTime updated_at;
@@ -41,7 +41,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'user_token',
     ];
 
     /**
