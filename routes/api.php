@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::post('auth/registerDevice', [\App\Http\Controllers\Api\AuthController::class, 'registerDevice']);
-Route::post('auth/registerUser', [\App\Http\Controllers\Api\AuthController::class, 'registerUser']);
+Route::middleware('auth.device:api')->post('auth/registerUser', [\App\Http\Controllers\Api\AuthController::class, 'registerUser']);
 Route::middleware('auth:api')->get('/auth/user/me', [\App\Http\Controllers\Api\AuthController::class, 'currentUser']);
 
 Route::post('subscription/purchase', [\App\Http\Controllers\Api\SubscriptionController::class, 'purchase']);

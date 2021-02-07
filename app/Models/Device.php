@@ -20,4 +20,11 @@ use Illuminate\Database\Eloquent\Model;
 class Device extends Model
 {
     use HasFactory;
+
+    public static function fromHeader()
+    {
+        $token = request()->bearerToken();
+        $token = explode('_', $token)[0];
+        return Device::where('client_token', $token)->first();
+    }
 }
