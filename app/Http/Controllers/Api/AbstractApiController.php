@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class AbstractApiController extends Controller
 {
@@ -10,20 +11,21 @@ class AbstractApiController extends Controller
     const ERROR = 'error';
 
     /***
-     *
      * @var mixed
      */
     protected $data;
 
+    /** @var User */
+    protected $user;
+
     public function __construct()
     {
         $this->data = new \stdClass();
-
-        $self = &$this;
+        $this->user = null;
+        $self       = &$this;
 
         $this->middleware(function ($request, $next) use ($self) {
             $self->user = auth()->user();
-
             // do something here
 
             return $next($request);

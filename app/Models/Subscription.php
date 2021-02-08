@@ -10,23 +10,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int id;
  * @property int user_id;
  * @property int application_id;
- * @property string uid;
- * @property string language;
  * @property string operation_system;
- * @property string client_token;
+ * @property string receipt;
+ * @property string status;
+ * @property string|\DateTime expire_date;
  * @property string|\DateTime created_at;
  * @property string|\DateTime updated_at;
  */
-class Device extends Model
+class Subscription extends Model
 {
     use HasFactory;
-
-    public static function fromHeader()
-    {
-        $token = request()->bearerToken();
-        $token = explode('_', $token)[0];
-        return Device::where('client_token', $token)->first();
-    }
 
     public function application()
     {

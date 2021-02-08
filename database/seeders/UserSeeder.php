@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
+    public static $MAX_INSERT = 1000000;
+
     /**
      * Seed the application's database.
      *
@@ -16,12 +18,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         $time         = DatabaseSeeder::milliseconds();
-        $maxInsert    = 10000;
         $lastInserted = 0;
         $password     = Hash::make("123456");
         $saveItems    = [];
 
-        for ($i = 0; $i < $maxInsert; $i++) {
+        for ($i = 1; $i <= self::$MAX_INSERT; $i++) {
             if ((DatabaseSeeder::milliseconds() - $time) >= 1000) {
                 $inserted = $i - $lastInserted;
                 echo "i: $i, inserted: $inserted" . PHP_EOL;
@@ -38,7 +39,7 @@ class UserSeeder extends Seeder
                 "user_token" => md5("test_$i@example.com"),
             ];
 
-            if ($i > 0 && ($i % 1000 == 0) || $i == ($maxInsert - 1)) {
+            if ($i > 0 && ($i % 1000 == 0) || $i == (self::$MAX_INSERT - 1)) {
                 User::insert($saveItems);
                 $saveItems = [];
             }
